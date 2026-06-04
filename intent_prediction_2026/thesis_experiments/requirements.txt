@@ -1,0 +1,66 @@
+# =============================================================================
+# requirements.txt — thesis_experiments
+#
+# Pedestrian intent prediction for smart door systems
+# KTH degree project at RISE
+#
+# Dependencies to reproduce the full pipeline: data cleaning, feature
+# extraction, model training (RQ1), edge benchmarking (RQ2), and system
+# latency testing (RQ3).
+#
+# JETSON ORIN NANO NOTES:
+#   PyTorch must be installed from NVIDIA's Jetson wheels, NOT from PyPI.
+#   The standard `pip install torch` will pull an x86 wheel that won't work.
+#
+#   1. Flash JetPack 6.2+ (ships with CUDA 12.6 and cuDNN 9.3)
+#   2. Install PyTorch from the Jetson AI Lab mirror:
+#        pip install torch torchvision --index-url https://pypi.jetson-ai-lab.dev/jp6/cu126
+#      Or use NVIDIA's official wheels:
+#        https://docs.nvidia.com/deeplearning/frameworks/install-pytorch-jetson-platform/
+#   3. Then install the remaining dependencies:
+#        pip install -r requirements.txt
+#
+#   The torch/torchvision lines below are commented out so they don't
+#   conflict with the Jetson-specific wheel.  Install them manually first.
+#
+# MACOS / x86 LINUX:
+#   pip install -r requirements.txt
+#   (torch will be pulled from PyPI automatically — uncomment the lines below)
+# =============================================================================
+
+# ─── Deep Learning Framework ────────────────────────────────────────────────
+# On Jetson: install manually from NVIDIA wheels BEFORE this file (see above)
+# On Mac/Linux x86: uncomment the two lines below
+# torch>=2.0.0
+# torchvision>=0.15.0
+
+# ─── Core Scientific Stack ──────────────────────────────────────────────────
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+
+# ─── Machine Learning ──────────────────────────────────────────────────────
+scikit-learn>=1.3.0
+
+# ─── Explainability ─────────────────────────────────────────────────────────
+shap>=0.42.0
+
+# ─── Visualization ──────────────────────────────────────────────────────────
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# ─── Computer Vision & Pose Estimation ──────────────────────────────────────
+opencv-python-headless>=4.8.0
+mediapipe>=0.10.0
+ultralytics>=8.0.0          # YOLO detection/pose (RQ2 perception benchmarks, demo)
+
+# ─── ONNX Export & Edge Inference (RQ2) ─────────────────────────────────────
+onnx>=1.14.0
+onnxruntime>=1.16.0
+onnxscript>=0.1.0
+
+# ─── ONNX Quantization (RQ2, optional) ─────────────────────────────────────
+# Included in onnxruntime, but listed for clarity:
+# onnxruntime-quantization is part of onnxruntime[quantization]
+# On Jetson with GPU: use onnxruntime-gpu instead of onnxruntime
+# pip install onnxruntime-gpu  (from NVIDIA's Jetson index)

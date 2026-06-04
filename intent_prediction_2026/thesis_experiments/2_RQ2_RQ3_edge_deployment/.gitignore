@@ -1,0 +1,5 @@
+
+# YOLO weights & exports (auto-downloaded/generated)
+*.pt
+*.onnx
+*.engine

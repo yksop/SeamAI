@@ -1,0 +1,24 @@
+For future user
+##################################################################################
+
+This folder is the start of a NEW data-collection pipeline for the smart-door
+pedestrian dataset. It records people at the door, labels each clip
+enter / pass / exit while recording, and applies the thesis cleaning heuristics
+on the fly, so collection + labeling + cleaning happen in one pass.
+
+It builds on the original data collection and automatic labeling in
+automatic_door/automatic_labeling/ (Norberg) and folds in the automatic cleaning
+developed for the thesis.
+
+Headline differences vs. the original data_collection.py (Norberg):
+  * a single YOLO pose model (yolo11n-pose) produces the bounding box AND the
+    17 COCO body keypoints in one pass -- no separate MediaPipe step;
+  * a third class, "exit", is detected and labeled at collection time;
+  * cleaning runs at capture: too-short / too-few-points / partial-bottom /
+    corrupt clips are sorted into removed/<reason>/ (nothing is deleted).
+
+Subfolders:
+  data_collection/   - the live collection script. Start here.
+  data/              - where the collection script writes the dataset.
+
+See README.md here and in data_collection/ for the details and the JSON schema.

@@ -1,0 +1,17 @@
+# Virtual environment — created locally, never committed.
+.venv/
+
+# Collected dataset — personal recordings (video + JSON). Never commit these.
+live_output/
+live_output_*/
+*.mp4
+
+# Auto-downloaded YOLO weights.
+*.pt
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

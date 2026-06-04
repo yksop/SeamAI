@@ -1,0 +1,26 @@
+# =============================================================================
+# requirements.txt — data_collection_v2
+# Pose-based pedestrian intent — new data collection pipeline (collect + label + clean).
+#
+# Prerequisite (Jetson): CUDA-enabled PyTorch + torchvision, OpenCV and NumPy are
+# already installed GLOBALLY on the device (see README, "Setup (Jetson)"). Make
+# the venv inherit them, then install this file on top:
+#
+#     python3 -m venv .venv --system-site-packages
+#     source .venv/bin/activate
+#     pip install -r requirements.txt
+#
+# This file does NOT install torch/torchvision from PyPI — on the Jetson those are
+# the global, CUDA-enabled builds. It adds ultralytics, plus pinned numpy/opencv
+# that stay compatible with the Jetson torch (see comments below).
+# =============================================================================
+
+ultralytics>=8.1.0          # YOLO pose model + BoT-SORT tracking
+numpy>=1.24.0,<2            # <2: the Jetson torch build is compiled against NumPy 1.x (NumPy 2 crashes it)
+opencv-python>=4.8.0,<4.10  # <4.10 keeps NumPy 1.x compatibility; opencv-python-headless if always headless
+
+# For full speed on the Jetson, export the pose model to a TensorRT engine once
+# (TensorRT ships with JetPack), then point the collector at the .engine:
+#   yolo export model=yolo11n-pose.pt format=engine half=True
+
+

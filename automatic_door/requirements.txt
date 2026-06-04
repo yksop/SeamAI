@@ -1,0 +1,34 @@
+# =============================================================================
+# requirements.txt — automatic_door (Hanna Norberg's scripts)
+#
+# Core dependencies for the DATA-COLLECTION / labeling scripts:
+#   automatic_labeling/data_collection.py
+#   automatic_labeling/always_on.py
+#
+# These need only OpenCV + NumPy + Ultralytics (YOLO). Ultralytics pulls in
+# torch, torchvision, opencv-python and numpy as its own dependencies, so this
+# single line is enough to run the collector.
+#
+# --- JETSON ORIN NANO ---
+# Create the venv with --system-site-packages so it reuses the Jetson's global
+# CUDA builds of torch / torchvision / OpenCV / NumPy (the plain PyPI wheels are
+# not CUDA-enabled on the Jetson). pip then only adds what is missing on top.
+# The live preview window in data_collection.py needs OpenCV *with GUI support*,
+# which the Jetson's system OpenCV provides — another reason to use
+# --system-site-packages rather than a headless OpenCV wheel.
+#
+# See README.md in this folder for the exact, copy-paste setup commands.
+# =============================================================================
+
+ultralytics>=8.0.0
+
+# --- Only needed for the OFFLINE ANALYSIS subfolders, NOT for collection ---
+# trajectory_prediction/, intention_prediction/ and data_enrichment/ also use:
+#   scikit-learn, matplotlib, joblib, mediapipe (data_enrichment),
+#   tensorflow (heavy — on Jetson use NVIDIA's build, not PyPI).
+# Uncomment the ones you need if you run those scripts:
+# scikit-learn>=1.3.0
+# matplotlib>=3.7.0
+# joblib>=1.3.0
+# mediapipe>=0.10.0
+# tensorflow

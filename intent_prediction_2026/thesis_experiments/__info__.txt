@@ -1,0 +1,27 @@
+For future user
+##################################################################################
+
+This folder holds the experiments from a KTH master's thesis (2026):
+predicting whether a pedestrian approaching a door intends to enter or pass by,
+and testing whether the model can run in real time on a Jetson edge device.
+
+It is the reproducible experiment pipeline, kept next to data_collection_v2/
+(the new data-collection pipeline for future data) and separate from the
+original automatic_door/ scripts, so nothing existing is touched.
+
+Folders, in run order:
+  0_data_cleaning/   - build the cleaned dataset (MasterData) from raw
+                       recordings (DataOriginal) and add pose landmarks.
+  utils/            - common code imported by the experiments: feature
+                       extraction, dataset loading, and the model definitions.
+  1_RQ1_feature_importance/   - RQ1: which features predict intent (logistic
+                       regression, random forest + SHAP, and an NN ablation).
+  2_RQ2_RQ3_edge_deployment/  - RQ2/RQ3: classifier and perception benchmarks
+                       on the edge device, plus live system latency.
+  demo_open_house/   - a standalone open-house attention demo with a small trained model.
+
+The datasets and the generated results/plots are not included (large + they
+contain identifiable video). The READMEs explain how to rebuild them.
+
+Start with README.md in this folder, then the README inside each subfolder.
+Run check_env.py first to confirm your environment is set up.
