@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Generated output and logs and utils
+logs/
+outputs/
+utils/
+test.py
+
+# Temporary test images
+test_capture.jpg
